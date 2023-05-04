@@ -498,8 +498,8 @@ while timePass(i-1)<=time
                      (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
                       ro_Solids*Cp_Solids*W_PB(5).Solids+ro_PG*Cp_PG*W_PB(5).PG+ro_Water*Cp_Water*W_PB(5).Water);
         W_Solids(i-1) = W_Solids(i-1) + W_PB(5).Solids;
-        W_PG(i-1) = W_PG(i-1) + W_PB(5).PG;
-        W_Water(i-1) = W_Water(i-1) + W_PB(5).Water;
+        W_PG(i-1) = W_PG(i-1) + W_PGPB5;
+        W_Water(i-1) = W_Water(i-1) + W_PB(5WaterPB5;
         else
             T_Ink(i-1)=T_InkPB5;
             W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
@@ -509,7 +509,7 @@ while timePass(i-1)<=time
             DemiLayer=false;
         end
         PB5_Ready = false;
-    elseif timePass(i-1)>=PB6_Start*time && PB6_Ready && AreaCoverage_PB(6)>0
+    elseif timePass(i-1)>=PB6_Start*time && PB6_Ready && AreaCoverage_PB6>0
         if ~DemiLayer
         dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
         T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
@@ -528,7 +528,7 @@ while timePass(i-1)<=time
             DemiLayer=false;
         end
         PB6_Ready = false;
-    elseif timePass(i-1)>=PB7_Start*time && PB7_Ready && AreaCoverage_PB(7)>0
+    elseif timePass(i-1)>=PB7_Start*time && PB7_Ready && AreaCoverage_PB7>0
         if ~DemiLayer
         dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
         T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
@@ -806,14 +806,13 @@ ylabel('Ink Temperature (C)');
 
 TinkEND = T_Ink(end);
 
-z_Water_Initial = W_Water(1);
-z_PG_Initial = W_PG(1);
+z_Water_Initial = ...
+    W_Water(1)+W_WaterPB1+W_WaterPB2+W_WaterPB3+W_WaterPB4...
+    +W_WaterPB5+W_WaterPB6+W_WaterPB7;
 
-for idx =1:7
-    z_Water_Initial = z_Water_Initial + W_PB(idx).Water;
-    z_PG_Initial = z_PG_Initial + W_PB(idx).PG;
-end
-
+z_PG_Initial = ...
+    W_PG(1)+W_PGPB1+W_PGPB2+W_PGPB3+W_PGPB4...
+    +W_PGPB5+W_PGPB6+W_PGPB7;
 
 WaterInLiquid = W_Water./(W_PG+W_Water)*100;
 z_Wet_finals = W_PG+W_Water;
