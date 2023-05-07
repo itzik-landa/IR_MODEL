@@ -3,7 +3,7 @@ function DryingSimIR2022
 LengthDryer = 2.0;
 p0 = 2.4*39e3/LengthDryer;
 PostDryer = 0.02;
-fig_out = 1;
+
 
 %%
 % mind the v_air -> maibe cancel front to back
@@ -86,8 +86,7 @@ TotalCoverage = sum(AreaCoverage_PB);
 % Test_Time = (1.122+1.878)/Print_Speed;%10; % sec 1:0.2455, 2:
 
 %% Test Matrix
-TestNumber = fig_out;%604;
-FigureNumber = TestNumber;
+
 NumberOfIPUs = 7;
 T_AirDryer = 300;%1200;%2150;%270;%
 % ExtraDryerLength = 0.0;%1.80;%1.05;%2.05;%
@@ -380,11 +379,11 @@ firstTimeInDryer = true;
 
 
 
-DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB_Ready, AreaCoverage_PB, DemiLayer, W_PB, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, FigureNumber, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, TestNumber, T_ink0)
+DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB_Ready, AreaCoverage_PB, DemiLayer, W_PB, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, T_ink0)
 
 end
 
-function DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB_Ready, AreaCoverage_PB, DemiLayer, W_PB, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, FigureNumber, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, TestNumber, T_ink0)
+function DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB_Ready, AreaCoverage_PB, DemiLayer, W_PB, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, T_ink0)
 T_Blanket_IRDryer_vector=[];
 q_Blanket_AirDryer = 0;
 T_InkPB(1) = T_ink0;
@@ -595,13 +594,25 @@ end
 
 % Q_L = ((W_Water(1)-W_Water(end))*ro_Water*L_Water + (W_PG(1)-W_PG(end))*ro_PG*L_PG)
 % sum(q_L)
+
+PrintItOut(dz, timePass, Print_Speed, T_Blanket, T_Ink, W_Water, W_PG, W_PB, z_Wet_Initial, TotalCoverage, IRDryerON, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy...
+    , IR_EffectiveLength, q_Blanket_IRDryer, Width, Length_IR_Dryer, q_Blanket_AirDryer, LengthDryer, p0, DryerStartIndex, W_Solids);
+
+end
+
+
+function PrintItOut(dz, timePass, Print_Speed, T_Blanket, T_Ink, W_Water, W_PG, W_PB, z_Wet_Initial, TotalCoverage, IRDryerON, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy,...
+    IR_EffectiveLength, q_Blanket_IRDryer, Width, Length_IR_Dryer, q_Blanket_AirDryer, LengthDryer, p0, DryerStartIndex, W_Solids)
+fig_out = 1;
+TestNumber = fig_out;%604;
+FigureNumber = TestNumber;
 %% Print results
 
 % Power = Width*Print_Speed/time*(dt)^2*sum(q_L)/1000
 
-Time_Vector_Temp = linspace(0,time,length(W_Solids));
+%Time_Vector_Temp = linspace(0,time,length(W_Solids));
 
-Length_vector = Print_Speed * Time_Vector_Temp;
+%Length_vector = Print_Speed * Time_Vector_Temp;
 
 % figure(1);plot(Length_vector,(W_Solids+W_PG+W_Water)*1e6,'.-');
 % figure(11);plot(linspace(0,time,length(W_Solids)),(W_Solids+W_PG+W_Water)*1e6,'.-');
@@ -616,7 +627,7 @@ Length_vector = Print_Speed * Time_Vector_Temp;
 
 % title('Drying');
 
-Power = cumsum(q_L)*Width*Length/1000;
+%Power = cumsum(q_L)*Width*Length/1000;
 % Q = Power(end)
 % figure(3);plot(linspace(0,time,length(W_Solids)),Power,'.-');
 % 
@@ -727,7 +738,6 @@ disp([ToDisplay ' ; ' PowerDisplay]);
 % close Figure(468);
 
 toc;
-
 end
 
 
@@ -812,10 +822,10 @@ log10P2out = ((T(i+1)-Tin)*log10P2(i)+(Tin-T(i))*log10P2(i+1))...
 log10Pout = ((PG(i_PG+1)-PGinW)*log10P1out+(PGinW-PG(i_PG))*log10P2out)...
     /(PG(i_PG+1)-PG(i_PG));
 
-P1test = P1(i);
-P2test = P2(i);
-Pw1 = 10^log10P1out;
-Pw2 = 10^log10P2out;
+%P1test = P1(i);
+%P2test = P2(i);
+%Pw1 = 10^log10P1out;
+%Pw2 = 10^log10P2out;
 
 Pw = 10^log10Pout;
 
