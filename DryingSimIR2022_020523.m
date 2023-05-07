@@ -361,13 +361,9 @@ timePass(1)=0;
 % dt=dt0;
 % while i<=N_time+1
 i=2;
-PB1_Ready = true;
-PB2_Ready = true;
-PB3_Ready = true;
-PB4_Ready = true;
-PB5_Ready = true;
-PB6_Ready = true;
-PB7_Ready = true;
+for idx = 1:7
+    PB_Ready(idx) = true;
+end
 DemiLayer=true;
 
 z_Wet_Initial = W_PG(1)+W_Water(1);
@@ -384,156 +380,37 @@ firstTimeInDryer = true;
 
 
 
-DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB1_Ready, AreaCoverage_PB, PB2_Ready, DemiLayer, W_PB, PB3_Ready, PB4_Ready, PB5_Ready, PB6_Ready, PB7_Ready, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, FigureNumber, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, TestNumber, T_ink0)
+DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB_Ready, AreaCoverage_PB, DemiLayer, W_PB, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, FigureNumber, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, TestNumber, T_ink0)
 
 end
 
-function DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB1_Ready, AreaCoverage_PB, PB2_Ready, DemiLayer, W_PB, PB3_Ready, PB4_Ready, PB5_Ready, PB6_Ready, PB7_Ready, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, FigureNumber, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, TestNumber, T_ink0)
+function DoMagic(timePass, i, time, PB_Start ,W_Solids, W_PG, W_Water, k_Solids, k_PG, k_Water, Ch, ih, nz, hback, ro, Cp, h_air, tauu, taud, Nyquist, Print_Speed, dlmax, han, T_Ink, PGPercentages, WaterPercentages, v_air, X_air, Mw_PG, Mw_water, T_Blanket, Tback, Radiation_start, AirIPU_Start, AirIPU_end, h_IPU, T_IPU, ro_Solids, ro_PG, ro_Water, Cp_Solids, Cp_PG, Cp_Water, L_Water, L_PG, Q_From_Dryer, Width, AirDryer_Start, T_Press_Ambient, PB_Ready, AreaCoverage_PB, DemiLayer, W_PB, Radiation_end, firstTimeInDryer, LayerNumber, IndexOfFirstAbsorptionLayer, q_radiation_Layer, dzAbsorbing, h_air_IR, T_IR, AirDryer_end, Length, dz, FigureNumber, z_Wet_Initial, TotalCoverage, q_radiation_Blanket, AbsorbedEnergyDevidedByInputEnergy, IR_EffectiveLength, Length_IR_Dryer, LengthDryer, p0, TestNumber, T_ink0)
 T_Blanket_IRDryer_vector=[];
 q_Blanket_AirDryer = 0;
-T_InkPB1 = T_ink0;
-T_InkPB2 = T_ink0;
-T_InkPB3 = T_ink0;
-T_InkPB4 = T_ink0;
-T_InkPB5 = T_ink0;
-T_InkPB6 = T_ink0;
-T_InkPB7 = T_ink0;
+T_InkPB(1) = T_ink0;
+T_InkPB(2) = T_ink0;
+T_InkPB(3) = T_ink0;
+T_InkPB(4) = T_ink0;
+T_InkPB(5) = T_ink0;
+T_InkPB(6) = T_ink0;
+T_InkPB(7) = T_ink0;
 
 while timePass(i-1)<=time
     
-    if timePass(i-1)>=PB_Start(1)*time && PB1_Ready && AreaCoverage_PB(1)>0
-        if ~DemiLayer
-        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
-        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
-                      T_InkPB1*(ro_Solids*Cp_Solids*W_SolidsPB1+ro_PG*Cp_PG*W_PGPB1+ro_Water*Cp_Water*W_WaterPB1))/...
-                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
-                      ro_Solids*Cp_Solids*W_SolidsPB1+ro_PG*Cp_PG*W_PGPB1+ro_Water*Cp_Water*W_WaterPB1);
-        W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB1;
-        W_PG(i-1) = W_PG(i-1) + W_PGPB1;
-        W_Water(i-1) = W_Water(i-1) + W_WaterPB1;
-        else
-            T_Ink(i-1)=T_InkPB1;
-            W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
-            W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB1;
-            W_PG(i-1) = W_PG(i-1) + W_PGPB1;
-            W_Water(i-1) = W_Water(i-1) + W_WaterPB1;
-            DemiLayer=false;
-        end
-        PB1_Ready = false;
-    elseif timePass(i-1)>=PB_Start(2)*time && PB2_Ready && AreaCoverage_PB(2)>0
-        if ~DemiLayer
-        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
-        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
-                      T_InkPB2*(ro_Solids*Cp_Solids*W_SolidsPB2+ro_PG*Cp_PG*W_PGPB2+ro_Water*Cp_Water*W_WaterPB2))/...
-                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
-                      ro_Solids*Cp_Solids*W_SolidsPB2+ro_PG*Cp_PG*W_PGPB2+ro_Water*Cp_Water*W_WaterPB2);
-        W_Solids(i-1) = W_Solids(i-1) + W_PB(2).Solids;
-        W_PG(i-1) = W_PG(i-1) + W_PGPB2;
-        W_Water(i-1) = W_Water(i-1) + W_WaterPB2;
-        else
-            T_Ink(i-1)=T_InkPB2;
-            W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
-            W_Solids(i-1) = W_Solids(i-1) + W_PB(2).Solids;
-            W_PG(i-1) = W_PG(i-1) + W_PB(2).PG;
-            W_Water(i-1) = W_Water(i-1) + W_PB(2).Water;
-            DemiLayer=false;
-        end
-        PB2_Ready = false;
-    elseif timePass(i-1)>=PB_Start(3)*time && PB3_Ready && AreaCoverage_PB(3)>0
-        if ~DemiLayer
-        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
-        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
-                      T_InkPB3*(ro_Solids*Cp_Solids*W_SolidsPB3+ro_PG*Cp_PG*W_PGPB3+ro_Water*Cp_Water*W_WaterPB3))/...
-                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
-                      ro_Solids*Cp_Solids*W_SolidsPB3+ro_PG*Cp_PG*W_PGPB3+ro_Water*Cp_Water*W_WaterPB3);
-        W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB3;
-        W_PG(i-1) = W_PG(i-1) + W_PGPB3;
-        W_Water(i-1) = W_Water(i-1) + W_WaterPB3;
-        else
-            T_Ink(i-1)=T_InkPB3;
-            W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
-            W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB3;
-            W_PG(i-1) = W_PG(i-1) + W_PGPB3;
-            W_Water(i-1) = W_Water(i-1) + W_WaterPB3;
-            DemiLayer=false;
-        end
-        PB3_Ready = false;
-    elseif timePass(i-1)>=PB_Start(4)*time && PB4_Ready && AreaCoverage_PB(4)>0
-        if ~DemiLayer
-        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
-        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
-                      T_InkPB4*(ro_Solids*Cp_Solids*W_SolidsPB4+ro_PG*Cp_PG*W_PGPB4+ro_Water*Cp_Water*W_WaterPB4))/...
-                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
-                      ro_Solids*Cp_Solids*W_SolidsPB4+ro_PG*Cp_PG*W_PGPB4+ro_Water*Cp_Water*W_WaterPB4);
-        W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB4;
-        W_PG(i-1) = W_PG(i-1) + W_PGPB4;
-        W_Water(i-1) = W_Water(i-1) + W_WaterPB4;
-        else
-            T_Ink(i-1)=T_InkPB4;
-            W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
-            W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB4;
-            W_PG(i-1) = W_PG(i-1) + W_PGPB4;
-            W_Water(i-1) = W_Water(i-1) + W_WaterPB4;
-            DemiLayer=false;
-        end
-        PB4_Ready = false;
-    elseif timePass(i-1)>=PB_Start(5)*time && PB5_Ready && AreaCoverage_PB(5)>0
-        if ~DemiLayer
-        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
-        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
-                      T_InkPB5*(ro_Solids*Cp_Solids*W_PB(5).Solids+ro_PG*Cp_PG*W_PB(5).PG+ro_Water*Cp_Water*W_PB(5).Water))/...
-                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
-                      ro_Solids*Cp_Solids*W_PB(5).Solids+ro_PG*Cp_PG*W_PB(5).PG+ro_Water*Cp_Water*W_PB(5).Water);
-        W_Solids(i-1) = W_Solids(i-1) + W_PB(5).Solids;
-        W_PG(i-1) = W_PG(i-1) + W_PB(5).PG;
-        W_Water(i-1) = W_Water(i-1) + W_PB(5).Water;
-        else
-            T_Ink(i-1)=T_InkPB5;
-            W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
-            W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB5;
-            W_PG(i-1) = W_PG(i-1) + W_PGPB5;
-            W_Water(i-1) = W_Water(i-1) + W_WaterPB5;
-            DemiLayer=false;
-        end
-        PB5_Ready = false;
-    elseif timePass(i-1)>=PB_Start(6)*time && PB6_Ready && AreaCoverage_PB(6)>0
-        if ~DemiLayer
-        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
-        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
-                      T_InkPB6*(ro_Solids*Cp_Solids*W_SolidsPB6+ro_PG*Cp_PG*W_PGPB6+ro_Water*Cp_Water*W_WaterPB6))/...
-                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
-                      ro_Solids*Cp_Solids*W_SolidsPB6+ro_PG*Cp_PG*W_PGPB6+ro_Water*Cp_Water*W_WaterPB6);
-        W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB6;
-        W_PG(i-1) = W_PG(i-1) + W_PGPB6;
-        W_Water(i-1) = W_Water(i-1) + W_WaterPB6;
-        else
-            T_Ink(i-1)=T_InkPB6;
-            W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
-            W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB6;
-            W_PG(i-1) = W_PG(i-1) + W_PGPB6;
-            W_Water(i-1) = W_Water(i-1) + W_WaterPB6;
-            DemiLayer=false;
-        end
-        PB6_Ready = false;
-    elseif timePass(i-1)>=PB_Start(7)*time && PB7_Ready && AreaCoverage_PB(7)>0
-        if ~DemiLayer
-        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
-        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
-                      T_InkPB7*(ro_Solids*Cp_Solids*W_SolidsPB7+ro_PG*Cp_PG*W_PGPB7+ro_Water*Cp_Water*W_WaterPB7))/...
-                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
-                      ro_Solids*Cp_Solids*W_SolidsPB7+ro_PG*Cp_PG*W_PGPB7+ro_Water*Cp_Water*W_WaterPB7);
-        W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB7;
-        W_PG(i-1) = W_PG(i-1) + W_PGPB7;
-        W_Water(i-1) = W_Water(i-1) + W_WaterPB7;
-        else
-            T_Ink(i-1)=T_InkPB7;
-            W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
-            W_Solids(i-1) = W_Solids(i-1) + W_SolidsPB7;
-            W_PG(i-1) = W_PG(i-1) + W_PGPB7;
-            W_Water(i-1) = W_Water(i-1) + W_WaterPB7;
-            DemiLayer=false;
-        end
-        PB7_Ready = false;
+    if timePass(i-1)>=PB_Start(1)*time && PB_Ready(1) && AreaCoverage_PB(1)>0
+        [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(1, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water);
+    elseif timePass(i-1)>=PB_Start(2)*time && PB_Ready(2) && AreaCoverage_PB(2)>0
+        [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(2, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water);
+    elseif timePass(i-1)>=PB_Start(3)*time && PB_Ready(3) && AreaCoverage_PB(3)>0
+        [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(3, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water);
+    elseif timePass(i-1)>=PB_Start(4)*time && PB_Ready(4) && AreaCoverage_PB(4)>0
+        [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(4, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water);
+    elseif timePass(i-1)>=PB_Start(5)*time && PB_Ready(5) && AreaCoverage_PB(5)>0
+        [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(5, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water);
+    elseif timePass(i-1)>=PB_Start(6)*time && PB_Ready(6) && AreaCoverage_PB(6)>0
+        [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(6, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water);
+    elseif timePass(i-1)>=PB_Start(7)*time && PB_Ready(7) && AreaCoverage_PB(7)>0
+        [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(7, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water);
     end
         
     
@@ -850,6 +727,29 @@ disp([ToDisplay ' ; ' PowerDisplay]);
 % close Figure(468);
 
 toc;
+
+end
+
+
+function [dz_Ink, T_Ink, W_Solids, W_PG, W_Water, DemiLayer, PB_Ready] = SetValues(idx, i, DemiLayer, W_Solids, W_PG, W_Water, T_Ink, T_InkPB, W_PB, dz_Ink, PB_Ready, ro_Solids, Cp_Solids, ro_PG, Cp_PG, ro_Water, Cp_Water)
+    if ~DemiLayer
+        dz_Ink = (W_Solids(i-1)+W_PG(i-1)+W_Water(i-1));
+        T_Ink(i-1) = (T_Ink(i-1)*(ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1))+...
+                      T_InkPB(idx)*(ro_Solids*Cp_Solids*W_PB(idx).Solids+ro_PG*Cp_PG*W_PB(idx).PG+ro_Water*Cp_Water*W_PB(idx).Water))/...
+                     (ro_Solids*Cp_Solids*W_Solids(i-1)+ro_PG*Cp_PG*W_PG(i-1)+ro_Water*Cp_Water*W_Water(i-1)+...
+                      ro_Solids*Cp_Solids*W_PB(idx).Solids+ro_PG*Cp_PG*W_PB(idx).PG+ro_Water*Cp_Water*W_PB(idx).Water);
+        W_Solids(i-1) = W_Solids(i-1) + W_PB(idx).Solids;
+        W_PG(i-1) = W_PG(i-1) + W_PB(idx).PG;
+        W_Water(i-1) = W_Water(i-1) + W_PB(idx).Water;
+    else
+        T_Ink(i-1)=T_InkPB(idx);
+        W_Solids(1:i-1) = 0;%W_Solids(i-1) + W_SolidsPB1;
+        W_Solids(i-1) = W_Solids(i-1) + W_PB(idx).Solids;
+        W_PG(i-1) = W_PG(i-1) + W_PB(idx).PG;
+        W_Water(i-1) = W_Water(i-1) + W_PB(idx).Water;
+        DemiLayer=false;
+    end
+    PB_Ready(idx) = false;
 
 end
 
